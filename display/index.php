@@ -405,9 +405,14 @@
 						let dhuhrTime = moment(app.dhuhr._i, 'HH:mm');
 						let endTime = dhuhrTime.clone().add(durasiKhutbah, 'minutes');
 						let currentTime = moment();
-
+			
 						if (currentTime.isSameOrBefore(endTime, 'minute')) {
+							// khutbah aktif
 							app.showDisplayKhutbah();
+						} else {
+							app.khutbahTimer	= false;
+							app.showJadwal()
+							$('#display-khutbah').fadeOut();
 						}
 					}
 	
