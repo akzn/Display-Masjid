@@ -399,7 +399,18 @@
 						}
 						else
 							app.runFullCountDown(enIqomah,'IQOMAH',true);	// CountDown iqomah
+					} else if (moment().format('dddd')=='Friday' && app.db.jumat.active && moment().isSameOrAfter(moment(app.dhuhr._i, 'HH:mm'), 'minute') && moment().isSameOrBefore(moment(app.asr._i, 'HH:mm'), 'minute')) {
+						// fix logic for jumatan
+						let durasiKhutbah = app.db.jumat.duration // durasi in minutes
+						let dhuhrTime = moment(app.dhuhr._i, 'HH:mm');
+						let endTime = dhuhrTime.clone().add(durasiKhutbah, 'minutes');
+						let currentTime = moment();
+
+						if (currentTime.isSameOrBefore(endTime, 'minute')) {
+							app.showDisplayKhutbah();
+						}
 					}
+	
 				});
 				
 		
