@@ -43,8 +43,9 @@
 
 
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+	<meta name="google" content="notranslate">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -266,6 +267,10 @@
 			initialize	: function(){
 				app.timer	= setInterval(function(){app.cekPerDetik()},1000);
 				$('#preloader').delay(350).fadeOut('slow');
+
+				// fetch setting every 5 minutes
+				setInterval(function(){app.fetchSetting()},60000 * 5);
+
 				// console.log(app.db);
 				
 				
@@ -302,18 +307,6 @@
 				// app.showCountDownNextPray();
 				// app.runRightCountDown(app.dhuhr,'Dzuhur');
 				
-				$.ajax({  
-					type    : "POST",  
-					url     : "../proses.php",
-					dataType: "json",
-					data    : {id:'changeDbCheck'}
-				}).done(function(dt){
-					// console.log(dt.data);
-					if(app.cekDb==false) app.cekDb = dt.data;
-					else if(app.cekDb !== dt.data) location.reload();
-				}).fail(function(msg){
-					console.log(msg);
-				});
 				// console.log('interval-1000');
 			},
 			getJadwal	: function(jadwalDate){
@@ -583,6 +576,22 @@
 					'minutes'	: minutes,
 					'seconds'	: seconds
 				};
+			},
+
+			// get update setting
+			fetchSetting : function(){
+				$.ajax({  
+					type    : "POST",  
+					url     : "../proses.php",
+					dataType: "json",
+					data    : {id:'changeDbCheck'}
+				}).done(function(dt){
+					// console.log(dt.data);
+					if(app.cekDb==false) app.cekDb = dt.data;
+					else if(app.cekDb !== dt.data) location.reload();
+				}).fail(function(msg){
+					console.log(msg);
+				});
 			}
 		}
 		app.initialize();
