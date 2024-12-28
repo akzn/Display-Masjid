@@ -114,7 +114,7 @@
 						<div class="item slides '.($i==0?'active':'').'">
 						  <div class="hero">        
 							<hgroup>
-								<div class="text1">'.htmlentities($v[0]).'</div>        
+								<div class="text1" style="font-family: \'Titillium Web\', Helvetica, Arial, sans-serif;font-weight: 600;">'.htmlentities($v[0]).'</div>        
 								<div class="text2">'.nl2br(htmlentities($v[1])).'</div>        
 								<div class="text3">'.htmlentities($v[2]).'</div>
 							</hgroup>
@@ -268,7 +268,8 @@
 				app.timer	= setInterval(function(){app.cekPerDetik()},1000);
 				$('#preloader').delay(350).fadeOut('slow');
 
-				// fetch setting every 5 minutes
+				// fetch setting every 5 minutes, first time load fetch
+				app.fetchSetting();
 				setInterval(function(){app.fetchSetting()},60000 * 5);
 
 				// console.log(app.db);
