@@ -1276,13 +1276,13 @@ isha		= 18°
 						<li>
 							<a class="row">
 								<div class="col-xs-5" style="text-align:right">Version</div>
-								<div class="col-xs-7"><span class="badge bg-blue">1.0.0</span></div>
+								<div class="col-xs-7"><span class="badge bg-blue">1.0.1</span></div>
 							</a>
 						</li>
 						<li>
 							<a class="row">
 								<div class="col-xs-5" style="text-align:right">Date</div>
-								<div class="col-xs-7"><span class="badge bg-aqua">Feb 2020</span></div>
+								<div class="col-xs-7"><span class="badge bg-aqua">Jan 2024</span></div>
 							</a>
 						</li>
 						<li>
@@ -1295,6 +1295,12 @@ isha		= 18°
 							<a class="row">
 								<div class="col-xs-5" style="text-align:right">Display design</div>
 								<div class="col-xs-7">Rakel</div>
+							</a>
+						</li>
+						<li>
+							<a class="row">
+								<div class="col-xs-5" style="text-align:right">Update/patch</div>
+								<div class="col-xs-7">github.com/Akzn</div>
 							</a>
 						</li>
 						<li>

@@ -162,7 +162,7 @@ if (file_exists($file)){
 	</div>
 	<footer class="main-footer">
 		<div class="pull-right">
-		  <b>Version</b> 1.0.0 (Feb 2020)
+		  <b>Version</b> 1.0.1 (Jan 2024)
 		</div>
 		<strong>Display|Masjid</strong> Aplication
 	</footer>

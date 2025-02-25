@@ -49,14 +49,121 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
     <title>Display|Masjid</title>
     <link rel="icon" type="image/png" href="../icon.png"/>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 	<style>
-		
+		#running-text{
+			height: 11vh;
+		}
+		#running-text .item{
+			font-size: 4rem;
+		}
+		#running-text .item marquee{
+			vertical-align: middle;
+		}
+		#running-text:before{
+			height: 11vh;
+		}
+		#logo{
+			bottom: 16vh;
+		}
+
+		#countdown-timer{
+			bottom: 16vh;
+			position: relative;
+			background-color:rgba(121, 248, 248, 0.69);
+			/* padding: 5px; */
+			border-radius: 20px;
+			width: fit-content;
+			display: flex;
+			justify-content: flex-start;
+			gap: 10px;
+			position: fixed;
+			right: 30px;
+		}
+
+		#countdown-timer .timer{
+			font-weight: 800;
+			font-size: 2rem;
+			font-family: 'Poppins', Helvetica, Arial, sans-serif;
+			background-color:white;
+			overflow: hidden;
+			padding: 5px;
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+			border: 2px solid rgba(121, 248, 248, 0.69);
+		}
+
+		#countdown-timer .icon{
+			font-weight: 800;
+			font-size: 2rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding-left:10px;
+		}
+
+		.quote-carousel .carousel-inner .item{
+			height: 70vh;
+		}
+
+		.masjid-title-container{
+			/* height:5vh; */
+			padding:0.5em;
+			background-color: rgba(0,0,0,0.5);
+			color:#fff;
+			font-family: 'Titillium Web', Poppins, Helvetica, Arial, sans-serif;
+			text-align: end;
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		.masjid-title-container .title{
+			font-family: 'Roboto Slab', Helvetica, Arial, sans-serif;
+			color:white;
+			font-size:2em;
+			font-weight: 600;
+			/* letter-spacing: 2px; */
+		}
+
+		.masjid-title-container .sub-title{
+			color:white;
+			font-size:1.5em;
+		}
+
+		.masjid-title-container .icon{
+			color:white;
+			font-size: 4.5em;
+			margin: 0 0.5em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		@media screen and (min-width: 1920px){
+			#running-text .item{
+				font-size: 6rem;
+			}
+
+			.masjid-title-container .title{
+				font-family: 'Roboto Slab', Helvetica, Arial, sans-serif;
+				font-size:3em;
+				font-weight: 600;
+				letter-spacing: 2px;
+			}
+
+			.masjid-title-container .sub-title{
+				font-size:2em;
+			}
+		}
+	
 	</style>
 </head>
 
@@ -103,6 +210,13 @@
 		</div>
 	</div>
 	<div id="right-container">
+		<div class="masjid-title-container">
+			<div>
+				<h5 class="title"><span style="color:#f1c863">Masjid</span> Jami' Achmad</h5>
+				<h6 class="sub-title">Kelurahan Pejagoan, Kebumen, Jawa Tengah, 54361</h6>
+			</div>
+			<div class="icon"><i class="fas fa-mosque"></i></div>
+		</div>
 		<div id="quote">
 			<div class="carousel quote-carousel slide" data-ride="carousel" data-interval="<?=$info_timer?>" data-pause="null">
 			  <div class="carousel-inner">
@@ -128,7 +242,11 @@
 			  </div> 
 			</div>
 		</div>
-		<div id="logo" style="background-image: url(logo/<?=$logo?>);"></div>
+		<!-- <div id="logo" style="background-image: url(logo/<?=$logo?>);"></div> -->
+		<div id="countdown-timer">
+			<div class="icon"><i class="fas fa-clock"></i></div>
+			<div class="timer"><span id="countdown-timer-text">Maghrib</span> <span id="countdown-timer-time">-04:00:40</span></div>
+		</div>
 		<div id="running-text">
 			<div class="item">
 				<!-- <div class="text"> -->
@@ -307,6 +425,7 @@
 				app.displaySchedule();
 				// app.showCountDownNextPray();
 				// app.runRightCountDown(app.dhuhr,'Dzuhur');
+				app.runCountdownMini();
 				
 				// console.log('interval-1000');
 			},
@@ -556,6 +675,17 @@
 						// document.getElementById("demo").innerHTML = "EXPIRED";
 					}
 				},1000);
+			},
+			runCountdownMini	: function(){
+				let nextPray		= app.getNextPray();
+				app.countDownTimer	= setInterval(function(){
+					let t	= app.countDownCalculate(nextPray.date);
+
+					let title = nextPray.pray;
+					title = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+					$('#countdown-timer-text').html(title); 
+					$('#countdown-timer-time').html('-'+t.hours+':'+t.minutes+':'+t.seconds);
+				}, 1000);
 			},
 			countDownCalculate(jam){
 				let jamSekarang	= moment();//.subtract(2,'seconds');
