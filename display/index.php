@@ -75,7 +75,7 @@
 			bottom: 16vh;
 		}
 
-		#countdown-timer{
+		#countdown-timer-mini{
 			bottom: 16vh;
 			position: relative;
 			background-color:rgba(121, 248, 248, 0.69);
@@ -89,7 +89,7 @@
 			right: 30px;
 		}
 
-		#countdown-timer .timer{
+		#countdown-timer-mini .timer{
 			font-weight: 800;
 			font-size: 2rem;
 			font-family: 'Poppins', Helvetica, Arial, sans-serif;
@@ -101,7 +101,7 @@
 			border: 2px solid rgba(121, 248, 248, 0.69);
 		}
 
-		#countdown-timer .icon{
+		#countdown-timer-mini .icon{
 			font-weight: 800;
 			font-size: 2rem;
 			display: flex;
@@ -243,9 +243,9 @@
 			</div>
 		</div>
 		<!-- <div id="logo" style="background-image: url(logo/<?=$logo?>);"></div> -->
-		<div id="countdown-timer">
+		<div id="countdown-timer-mini">
 			<div class="icon"><i class="fas fa-clock"></i></div>
-			<div class="timer"><span id="countdown-timer-text">Maghrib</span> <span id="countdown-timer-time">-04:00:40</span></div>
+			<div class="timer"><span id="countdown-timer-mini-text">Maghrib</span> <span id="countdown-timer-mini-time">-04:00:40</span></div>
 		</div>
 		<div id="running-text">
 			<div class="item">
@@ -683,8 +683,8 @@
 
 					let title = nextPray.pray;
 					title = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
-					$('#countdown-timer-text').html(title); 
-					$('#countdown-timer-time').html('-'+t.hours+':'+t.minutes+':'+t.seconds);
+					$('#countdown-timer-mini-text').html(title); 
+					$('#countdown-timer-mini-time').html('-'+t.hours+':'+t.minutes+':'+t.seconds);
 				}, 1000);
 			},
 			countDownCalculate(jam){
